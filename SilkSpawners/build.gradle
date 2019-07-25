@@ -1,0 +1,57 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '2.0.4'
+}
+
+dependencies {
+    compile(project(':API'))
+    compile(project(':v1_7_R1'))
+    compile(project(':v1_7_R2'))
+    compile(project(':v1_7_R3'))
+    compile(project(':v1_7_R4'))
+    compile(project(':v1_8_R1'))
+    compile(project(':v1_8_R2'))
+    compile(project(':v1_8_R3'))
+    compile(project(':v1_9_R1'))
+    compile(project(':v1_9_R2'))
+    compile(project(':v1_10_R1'))
+    compile(project(':v1_11_R1'))
+    compile(project(':v1_12_R1'))
+    compile(project(':v1_13_R1'))
+    compile(project(':v1_13_R2'))
+    compile(project(':v1_14_R1'))
+    compileOnly('org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT')
+    compileOnly('org.projectlombok:lombok:1.18.8')
+    annotationProcessor('org.projectlombok:lombok:1.18.8')
+    compileOnly('com.sk89q.worldguard:worldguard-core:7.0.0')
+    compileOnly('com.sk89q.worldguard:worldguard-bukkit:7.0.0')
+    compileOnly('com.sk89q.worldedit:worldedit-bukkit:7.0.0')
+    compileOnly('me.confuser:BarAPI:3.5')
+    compileOnly('com.massivecraft.massivecore:MassiveCore:2.14.1')
+    compileOnly('com.massivecraft.factions:Factions:2.14.1')
+    compileOnly('com.massivecraft:Factions:1.6.9.5-U0.4.3')
+    compileOnly('us.forseth11:feudal:1.5.2')
+    compile('org.bstats:bstats-bukkit:1.5')
+    compile('net.gravitydevelopment.updater:updater:2.4')
+}
+
+clean {
+    delete(rootProject.file('target'))
+}
+
+shadowJar {
+    destinationDir(rootProject.file('target'))
+    archiveName('SilkSpawners.jar')
+    dependencies {
+        include(dependency('de.dustplanet:.*'))
+        include(dependency('org.bstats:bstats-bukkit'))
+        include(dependency('net.gravitydevelopment.updater:updater'))
+    }
+
+    relocate('net.gravitydevelopment.updater', 'de.dustplanet.util')
+    relocate('org.bstats.bukkit', 'de.dustplanet.util')
+}
+
+artifacts {
+    archives shadowJar
+}
+

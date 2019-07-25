@@ -1,0 +1,4 @@
+dependencies {
+    compileOnly(project(':API'))
+    compileOnly('org.bukkit:craftbukkit:1.7.2-R0.4')
+}
